@@ -42,6 +42,9 @@ public class MainActivity extends AppCompatActivity
 
     private NetworkInfo myNetInfo;
 
+    private String POP;
+
+    private String RATING;
 
 
     @Override
@@ -55,7 +58,7 @@ public class MainActivity extends AppCompatActivity
         {
             MovieLoadAsyncTask loadMovies = new MovieLoadAsyncTask(movieList, myAdapter, progressBar);
             //default is to fetch movies that is sort by their popularities
-            loadMovies.execute(MyURL.getPopFilter());
+            loadMovies.execute(POP);
         }else
         {
             //handle completely no internet situation
@@ -80,13 +83,13 @@ public class MainActivity extends AppCompatActivity
             case R.id.submenu_popular:
                 //sort by popularity
                 loadMovies = new MovieLoadAsyncTask(movieList, myAdapter, progressBar);
-                loadMovies.execute(MyURL.getPopFilter());
+                loadMovies.execute(POP);
                 return true;
 
             case R.id.submenu_rating:
                 //sort by rating
                 loadMovies = new MovieLoadAsyncTask(movieList, myAdapter, progressBar);
-                loadMovies.execute(MyURL.getRatingFilter());
+                loadMovies.execute(RATING);
                 return true;
 
         }
@@ -111,6 +114,8 @@ public class MainActivity extends AppCompatActivity
 
     private void initilizeLayout()
     {
+        POP = "popular";
+        RATING = "top_rated";
 
         progressBar = findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
